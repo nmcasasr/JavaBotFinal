@@ -25,7 +25,10 @@ app.get('/webhook', function (req, res) {
     }
 
 });
+app.get('/webhook',function(req,res){
 
+    setupGetStartedButton(res);
+});
 
 app.post('/webhook', function (req, res) {
     var data = req.body;
@@ -72,7 +75,7 @@ function setupGetStartedButton(res) {
         ]
     };
     console.log("Star button work");
-    callSendAPI(messageData);
+    callSendAPIStart(messageData);
     // Start the request
 
 }
@@ -92,7 +95,6 @@ function evaluateMessage(recipientId, message) {
         finalMessage = 'A continuaci�n te explicar� c�mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageButtonReq(recipientId, finalMessage);
     }
-
     else if (isContain(message, 'Preguntas frecuentes')) {
         finalMessage = 'En esta secci��n conocer�s todo acerca de los precios y variedad de los productos que puedes encontrar en Java� Shoppu';
         sendMessageButtonAsk(recipientId, finalMessage);
@@ -105,7 +107,6 @@ function evaluateMessage(recipientId, message) {
         finalMessage = 'A continuaci�n te explicar� c�mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageText(recipientId, finalMessage);
     }
-
     else if (isContain(message, 'otros')) {
         finalMessage = 'En esta secci��n conocer�s todo acerca de los precios y variedad de los productos que puedes encontrar en Java� Shoppu';
         sendMessageText(recipientId, finalMessage);
@@ -122,7 +123,6 @@ function evaluateMessage(recipientId, message) {
         finalMessage = 'A continuaci�n te explicar� c�mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageButtonReq(recipientId, finalMessage);
     }
-
     else if (isContain(message, '#ClienteJavaShoopu')) {
         finalMessage = 'En esta secci��n conocer�s todo acerca de los precios y variedad de los productos que puedes encontrar en Java� Shoppu';
         sendMessageButtonAsk(recipientId, finalMessage);
@@ -135,7 +135,6 @@ function evaluateMessage(recipientId, message) {
         finalMessage = 'A continuaci�n te explicar� c�mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageButtonReq(recipientId, finalMessage);
     }
-
     else if (isContain(message, 'Otros productos')) {
         finalMessage = 'En esta secci��n conocer�s todo acerca de los precios y variedad de los productos que puedes encontrar en Java� Shoppu';
         sendMessageButtonAsk(recipientId, finalMessage);
@@ -432,6 +431,20 @@ function sendMessageButtonStart(recipientId, message) {
 function callSendAPI(messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages?access_token=test_token_java',
+        qs: { access_token : APP_TOKEN },
+        method: 'POST',
+        json: messageData
+    }, function (error, response, data) {
+        if (error) {
+            console.log('No esta funcionando');
+        } else {
+            console.log('exito');
+        }
+    });
+}
+function callSendAPIStart(messageData) {
+    request({
+        uri: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=test_token_java',
         qs: { access_token : APP_TOKEN },
         method: 'POST',
         json: messageData
