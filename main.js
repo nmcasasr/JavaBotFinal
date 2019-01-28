@@ -18,33 +18,33 @@ app.get('/',function(req,res){
 app.get('/webhook', function (req, res) {
     if (req.query['hub.verify_token'] == 'test_token_java') {
         res.send(req.query['hub.challenge']);
-        
+
     }
     else {
         res.send('Tu no deberias estar aqui');
     }
-    
+
 });
 
 
 app.post('/webhook', function (req, res) {
     var data = req.body;
-    
+
     if (data.object == 'page') {
 
         data.entry.forEach(function (pageEntry) {
             pageEntry.messaging.forEach(function (messagingEvent) {
 
-               
+
 
                 if (messagingEvent.message) {
                 receiveMessage(messagingEvent);
                 }
                 else if (messagingEvent.postback) {
-                    receivePostBack(messagingEvent);
+                receivePostBack(messagingEvent);
                 }
-                
-                
+
+
             });
         });
         res.sendStatus(200);
@@ -54,13 +54,13 @@ app.post('/webhook', function (req, res) {
 function receiveMessage(event) {
     var senderId = event.sender.id;
     var messageText = event.message.text;
-    evaluateMessage(senderId, messageText);
-    //sendMessageButtonStart(senderId, messageText)
+    //evaluateMessage(senderId, messageText);
+    sendMessageButtonStart(senderId, messageText)
 }
 function receivePostBack(event) {
     var senderId = event.sender.id;
     var messagePayload = event.postback.payload;
-    evaluateMessage(senderId, messagePayload);
+    evaluatePostBack(senderId, messagePayload);
 
 }
 function setupGetStartedButton(res) {
@@ -74,78 +74,155 @@ function setupGetStartedButton(res) {
     console.log("Star button work");
     callSendAPI(messageData);
     // Start the request
-  
-}        
+
+}
 function firstMessage(recipientId, message) {
 
 }
 function evaluateMessage(recipientId, message) {
     var finalMessage = '';
+    /*
     console.log("entro");
-    //opcion uno 
+    //opcion uno
     if (isContain(message, 'Informacion de productos')) {
-        finalMessage = 'En esta sección conocerás todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
+        finalMessage = 'En esta secciï¿½n conocerï¿½s todo acerca de los precios y variedad de los productos que puedes encontrar en Javaï¿½ Shoppu';
         sendMessageButtonInfo(recipientId,finalMessage);
     }
     else if (isContain(message, 'Informacion de pedido')) {
-        finalMessage = 'A continuación te explicaré cómo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
+        finalMessage = 'A continuaciï¿½n te explicarï¿½ cï¿½mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageButtonReq(recipientId, finalMessage);
     }
-   
+
     else if (isContain(message, 'Preguntas frecuentes')) {
-        finalMessage = 'En esta secciñón conocerás todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
+        finalMessage = 'En esta secciï¿½ï¿½n conocerï¿½s todo acerca de los precios y variedad de los productos que puedes encontrar en Javaï¿½ Shoppu';
         sendMessageButtonAsk(recipientId, finalMessage);
     }
     else if (isContain(message, 'coreanos')) {
-        finalMessage = 'Estos son los últimos lanzamientos publicados en la sección tienda de Java’ Shoppu, en su buscador puedes encontrar tu artista o álbum favorito.Si no está lo que deseas no dudes en comentarme, pronto el #JavaTeam te estará dando respuesta.';
+        finalMessage = 'Estos son los ï¿½ltimos lanzamientos publicados en la secciï¿½n tienda de Javaï¿½ Shoppu, en su buscador puedes encontrar tu artista o ï¿½lbum favorito.Si no estï¿½ lo que deseas no dudes en comentarme, pronto el #JavaTeam te estarï¿½ dando respuesta.';
         sendMessageText(recipientId, finalMessage);
     }
     else if (isContain(message, 'japoneses')) {
-        finalMessage = 'A continuación te explicaré cómo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
+        finalMessage = 'A continuaciï¿½n te explicarï¿½ cï¿½mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageText(recipientId, finalMessage);
     }
 
     else if (isContain(message, 'otros')) {
-        finalMessage = 'En esta secciñón conocerás todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
+        finalMessage = 'En esta secciï¿½ï¿½n conocerï¿½s todo acerca de los precios y variedad de los productos que puedes encontrar en Javaï¿½ Shoppu';
         sendMessageText(recipientId, finalMessage);
     }
     else if (isContain(message, 'proceso de compra')) {
-        finalMessage = 'En esta sección conocerás todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
+        finalMessage = 'En esta secciï¿½n conocerï¿½s todo acerca de los precios y variedad de los productos que puedes encontrar en Javaï¿½ Shoppu';
         sendMessageButtonInfo(recipientId, finalMessage);
     }
     else if (isContain(message, 'confirmar pago')) {
-        finalMessage = 'A continuación te explicaré cómo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
+        finalMessage = 'A continuaciï¿½n te explicarï¿½ cï¿½mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageButtonReq(recipientId, finalMessage);
     }
     else if (isContain(message, 'estado de un pedido')) {
-        finalMessage = 'A continuación te explicaré cómo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
+        finalMessage = 'A continuaciï¿½n te explicarï¿½ cï¿½mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageButtonReq(recipientId, finalMessage);
     }
 
     else if (isContain(message, '#ClienteJavaShoopu')) {
-        finalMessage = 'En esta secciñón conocerás todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
+        finalMessage = 'En esta secciï¿½ï¿½n conocerï¿½s todo acerca de los precios y variedad de los productos que puedes encontrar en Javaï¿½ Shoppu';
         sendMessageButtonAsk(recipientId, finalMessage);
     }
     else if (isContain(message, '#JavaShoppuFamily')) {
-        finalMessage = 'En esta sección conocerás todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
+        finalMessage = 'En esta secciï¿½n conocerï¿½s todo acerca de los precios y variedad de los productos que puedes encontrar en Javaï¿½ Shoppu';
         sendMessageButtonInfo(recipientId, finalMessage);
     }
     else if (isContain(message, 'Japoneses')) {
-        finalMessage = 'A continuación te explicaré cómo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
+        finalMessage = 'A continuaciï¿½n te explicarï¿½ cï¿½mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
         sendMessageButtonReq(recipientId, finalMessage);
     }
 
     else if (isContain(message, 'Otros productos')) {
-        finalMessage = 'En esta secciñón conocerás todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
+        finalMessage = 'En esta secciï¿½ï¿½n conocerï¿½s todo acerca de los precios y variedad de los productos que puedes encontrar en Javaï¿½ Shoppu';
         sendMessageButtonAsk(recipientId, finalMessage);
     }
     else {
-        finalMessage = 'No funcionña';
+        finalMessage = 'No funcionï¿½a';
         sendMessageButtonStart(recipientId, finalMessage);
+    }
+*/
+}
+function evaluatePostBack(recipientId, message) {
+    var finalMessage = '';
+    console.log("entro");
+    //opcion uno
+    if (isContain(message, 'informacion de productos')) {
+        finalMessage = 'En esta secciÃ³n conoceras todo acerca de los precios y variedad de los productos que puedes encontrar en Javaâ€™ Shoppu';
+        sendMessageButtonInfo(recipientId,finalMessage);
+    }
+   // sub-opciones de opcion 1
+    else if (isContain(message, 'coreanos')) {
+        finalMessage = 'Estos son los Ãºltimos lanzamientos publicados en la secciÃ³n tienda de Javaâ€™ Shoppu, en su buscador puedes encontrar tu artista o Ã¡lbum favorito.Si no estÃ¡ lo que deseas no dudes en comentarme, pronto el #JavaTeam te estarÃ¡ dando respuesta.';
+        sendMessageText(recipientId, finalMessage);
+    }
+    else if (isContain(message, 'japoneses')) {
+        finalMessage = 'En Javaâ€™ Shoppu tambiÃ©n puedes conseguir CDâ€™s, DVDâ€™s, photobooks y otros productos de tus artistas japoneses o extranjeros con lanzamientos en JapÃ³n. Recuerda que su tiempo de espera es mayor a los productos coreanos. \n CuÃ©nteme cuÃ¡l artista y producto desea y le comunicarÃ© al #JavaTeam para que dÃ© pronta respuesta :D';
+        sendMessageText(recipientId, finalMessage);
+    }
+    else if (isContain(message, 'otros productos')) {
+        finalMessage = 'Â¿Deseas algo mÃ¡s que productos oficiales? En Javaâ€™ Shoppu puedes conseguir maquillaje TONYMOLY y productos fanmade como afiches con la imagen que desees, set con postcards y stickers, pines metÃ¡licos, gorras, camisetas y mucho mÃ¡s. \n TambiÃ©n contamos con productos de otros paÃ­ses como China, TaiwÃ¡n y EEUU, sÃ³lo pregÃºntame y estarÃ© comunicÃ¡ndole la info al #JavaTeam para su pronta respuesta.';
+        sendMessageText(recipientId, finalMessage);
+    }
+
+
+    //opcion 2
+    else if (isContain(message, 'informacion de pedido')) {
+        finalMessage = 'A continuaciÃ³n te explicarÃ© cÃ³mo realizar un pedido, confirmar un pago y realizar seguimiento a una compra ya realizada.';
+        sendMessageButtonReq(recipientId, finalMessage);
+    }
+  // sub-opciones de opcion 2
+      else if (isContain(message, 'proceso de compra')) {
+        finalMessage = 'El proceso de compra en Javaâ€™ Shoppu es muuuy sencillo, te lo explico en 5 pasos: \n1. Ya encontrados los productos que deseas y sus precios, debes realizar un abono inicial de mÃ­nimo el 60% correspondiente al total sin envÃ­o. \n 2. Una vez culminada la fecha de pedido, el tiempo de llegada a Colombia es de 5-10 dÃ­as hÃ¡biles para productos coreanos. Productos japoneses y especiales tardan entre 20-25 dÃ­as hÃ¡biles. \n 3. En Javaâ€™ Shoppu se cierran pedidos todos los 15 y 30 de cada mes. \n 4. Al llegar tus productos el #JavaTeam te lo comunicarÃ¡ vÃ­a Facebook, si existe un saldo pendiente se tendrÃ¡n 10 dÃ­as hÃ¡biles para su cancelaciÃ³n a partir del aviso. \n 5. El servicio de envÃ­o se cancela en contra-entrega al mensajero. En MedellÃ­n contamos con mensajero propio dentro del #JavaTeam :D \n Â¿He sido claro? AquÃ­ tengo otra informaciÃ³n que puede serte Ãºtil:';
+        sendMessageButtonReqSub(recipientId, finalMessage);
+      }
+          //sub-sub-opcion de proceso de compra
+          else if (isContain(message, 'formas de pago')) {
+              finalMessage = 'En Javaâ€™ Shoppu se manejan las siguientes formas de pago para toda Colombia: \n Gratis por transferencia bancaria desde cualquier banco, recarga en Nequi y depÃ³sito en Corresponsal Bancario de Bancolombia. Giro con cobro por servicio vÃ­a Efecty..';
+              sendMessageText(recipientId, finalMessage);
+          }
+          else if (isContain(message, 'ver productos')) {
+              finalMessage = 'link tienda';
+              //cambiar por postback link
+              sendMessageText(recipientId, finalMessage);
+          }
+          else if (isContain(message, 'confiabilidad')) {
+              finalMessage = 'Javaâ€™ Shoppu es una tienda totalmente confiable Â¡lleva en el mercado colombiano 7 aÃ±os! entregÃ¡ndole a los seguidores de la mÃºsica asiÃ¡tica los mejores productos oficiales y fanmade de sus artistas favoritos. \n En nuestro Facebook e Instagram @JavaShoppu puedes encontrar fotos de los productos, calificaciones y comentarios de nuestros #ClienteJavaShoppu a lo largo de estos aÃ±os.';
+              sendMessageText(recipientId, finalMessage);
+          }
+
+      else if (isContain(message, 'confirmar pago')) {
+        finalMessage = 'Â¡Muchas gracias por confiar en Javaâ€™ Shoppu! Por favor no olvides adjuntar una foto del comprobante de pago y los siguientes datos: nombres, celular, ciudad, direcciÃ³n detallada y nÃºmero de documento. Pronto el #JavaTeam estarÃ¡ enviando su orden de compra.';
+        sendMessageText(recipientId, finalMessage);
+      }
+      else if (isContain(message, 'estado de un pedido')) {
+        finalMessage = 'Â¡SÃ© que deseas tu pedido ya en tus manos! Vi trabajar arduamente al #JavaTeam para que muy pronto lo tengas en ellas para su disfrute ^^ por favor escrÃ­beme el nÃºmero de orden para que el #JavaTeam se comunique con nuevas noticias.';
+        sendMessageText(recipientId, finalMessage);
+      }
+
+//opcion 3
+    else if (isContain(message, 'preguntas frecuentes')) {
+        finalMessage = 'Por si te queda alguna dudita adicional jeje, aquÃ­tle presentamos nuestro programa de fidelizaciÃ³n y otras cositas';
+        sendMessageButtonAsk(recipientId, finalMessage);
+    }
+//sub-opcion de opciones 3
+    else if (isContain(message, '#ClienteJavaShoopu')) {
+        finalMessage = 'Javaâ€™ Shoppu posee un programa que premia a sus clientes fieles. Es muy fÃ¡cil pertenecer a este, sÃ³lo con realizar una compra de un producto oficial te conviertes automÃ¡ticamente en #ClienteJavaShoppu. Los beneficios son: \n 1. Descuento del 5% en todas sus compras. \n 2. Descuento del 10% durante el mes de su cumpleaÃ±os. \n 3. Descuento del 10% en productos de la secciÃ³n #HoyHace1AÃ±o. \n 4. ParticipaciÃ³n exclusiva en rifas y concursos. \n 5. Futuras promociones que se comunicarÃ¡n.';
+        sendMessageButtonAsk(recipientId, finalMessage);
+    }
+    else if (isContain(message, '#JavaShoppuFamily')) {
+        finalMessage = '#JavaShoppuFamily es toda la Comunidad creada alrededor de Javaâ€™ Shoppu, en donde se comparte informaciÃ³n de primera como nuevos lanzamientos, promociones y futuros concursos. Es gratis pertenecer a ella, sÃ³lo debes inscribirte en nuestra base de datos para recibir informaciÃ³n ^^';
+        sendMessageButtonInfo(recipientId, finalMessage);
+    }
+    else if (isContain(message, 'hablar con el #JavaTeam')) {
+        finalMessage = 'Espero haberte podido ayudar en aclarar sus dudas, en un momento el #JavaTeam estarÃ¡ comunicÃ¡ndose. \n Se despide tu amigo Javabot Â¡seguro estaremos en contacto de nuevo';
+        sendMessageButtonReq(recipientId, finalMessage);
     }
 
 }
-
 function sendMessageText(recipientId,message) {
 
     var messageData = {
@@ -187,7 +264,7 @@ function sendMessageButtonInfo(recipientId, message) {
                         {
                             type: "postback",
                             title: "Otros productos",
-                            payload: "otros"
+                            payload: "otros productos"
                         }
 
                     ]
@@ -215,19 +292,58 @@ function sendMessageButtonReq(recipientId, message) {
                         {
                             type: "postback",
                             title: "Proceso de compra",
-                            payload: "buy"
+                            payload: "proceso de compra"
                         },
                         {
                             type: "postback",
                             title: "Confirmar pago",
-                            payload: "confirm pay"
+                            payload: "confirmar pago"
                         },
                         {
                             type: "postback",
                             title: "Estado de un pedido",
-                            payload: "otros"
+                            payload: "estado de pedido"
                         }
-                       
+
+
+                    ]
+                }
+            }
+        }
+    };
+
+    callSendAPI(messageData);
+}
+function sendMessageButtonReqSub(recipientId, message) {
+
+    var messageData = {
+        recipient: {
+            id: recipientId
+
+        },
+        message: {
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "button",
+                    text: message,
+                    buttons: [
+                        {
+                            type: "postback",
+                            title: "Formas de pago",
+                            payload: "formas de pago"
+                        },
+                        {
+                            type: "postback",
+                            title: "Ver productos",
+                            payload: "ver productos"
+                        },
+                        {
+                            type: "postback",
+                            title: "Confiabilidad",
+                            payload: "confiabilidad"
+                        }
+
 
                     ]
                 }
@@ -254,22 +370,22 @@ function sendMessageButtonAsk(recipientId, message) {
                         {
                             type: "postback",
                             title: "#ClienteJavaShoopu",
-                            payload: "javaClient"
+                            payload: "#ClienteJavaShoopu"
                         },
                         {
                             type: "postback",
                             title: "#JavaShoppuFamily",
-                            payload: "javaFamily"
+                            payload: "#JavaShoppuFamily"
                         },
                         {
                             type: "postback",
                             title: "Hablar con el #JavaTeam",
-                            payload: "javaTeam"
+                            payload: "hablar con el #JavaTeam"
                         }
 
                     ]
                 }
-            } 
+            }
         }
     };
 
@@ -287,22 +403,22 @@ function sendMessageButtonStart(recipientId, message) {
                 type: "template",
                 payload: {
                     template_type: "button",
-                    text: "¡Hola! soy Javabot, el asistente virtual de Java’ Shoppu ¿en qué puedo asesorarte?",
+                    text: "Â¡Hola! soy Javabot, el asistente virtual de Javaâ€™ Shoppu Â¿en quÃ© puedo asesorarte?",
                     buttons: [
                         {
                             type: "postback",
                             title: "Informacion de productos",
-                            payload: "Informacion de productos"
+                            payload: "informacion de productos"
                         },
                         {
                             type: "postback",
                             title: "Informacion de pedido",
-                            payload: "Informacion de pedido"
+                            payload: "informacion de pedido"
                         },
                         {
                             type: "postback",
                             title: "Preguntas frecuentes",
-                            payload: "Preguntas frecuentes"
+                            payload: "preguntas frecuentes"
                         }
 
                     ]
@@ -330,4 +446,3 @@ function callSendAPI(messageData) {
 function isContain(sentence, word) {
     return sentence.indexOf(word) > -1;
 }
-
