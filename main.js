@@ -350,7 +350,7 @@ function sendMessageButtonAsk(recipientId, message) {
                         },
                         {
                             type: "postback",
-                            title: "Hablar con el #JavaTeam",
+                            title: "Hablar con #JavaTeam",
                             payload: "hablar con el #JavaTeam"
                         }
 
