@@ -7,8 +7,8 @@ const APP_TOKEN = 'EAAO9xR4dD5MBAC3JzfoNAtYvyBovmTZAhZAi71CNnVlLpoLekPggZCdgHZAq
 var app = express();
 app.use(bodyParser.json());
 
-app.listen(5000,function(){
-  console.log("El servidor se encuentra en el 5000");
+app.listen(8080,function(){
+  console.log("El servidor se encuentra en el 8080");
 });
 
 app.get('/',function(req,res){
@@ -36,13 +36,13 @@ app.post('/webhook', function (req, res) {
             pageEntry.messaging.forEach(function (messagingEvent) {
 
 
-
-                if (messagingEvent.message) {
+               if (messagingEvent.postback) {
+              receivePostBack(messagingEvent);
+              }
+                else if (messagingEvent.message) {
                 receiveMessage(messagingEvent);
                 }
-                else if (messagingEvent.postback) {
-                receivePostBack(messagingEvent);
-                }
+
 
 
             });
@@ -185,11 +185,6 @@ function evaluatePostBack(recipientId, message) {
               finalMessage = 'En Java’ Shoppu se manejan las siguientes formas de pago para toda Colombia:\n\nGratis por transferencia bancaria desde cualquier banco, recarga en Nequi y depósito en Corresponsal Bancario de Bancolombia.\n\nGiro con cobro por servicio vía Efecty..';
               sendMessageText(recipientId, finalMessage);
           }
-          else if (isContain(message, 'ver productos')) {
-              finalMessage = 'link tienda';
-              //cambiar por postback link
-              sendMessageText(recipientId, finalMessage);
-          }
           else if (isContain(message, 'confiabilidad')) {
               finalMessage = 'Java’ Shoppu es una tienda totalmente confiable ¡lleva en el mercado colombiano 7 años! entregándole a los seguidores de la música asiática los mejores productos oficiales y fanmade de sus artistas favoritos.\n\nEn nuestro Facebook e Instagram @JavaShoppu puedes encontrar fotos de los productos, calificaciones y comentarios de nuestros #ClienteJavaShoppu a lo largo de estos años.';
               sendMessageText(recipientId, finalMessage);
@@ -216,7 +211,7 @@ function evaluatePostBack(recipientId, message) {
     }
     else if (isContain(message, '#JavaShoppuFamily')) {
         finalMessage = '#JavaShoppuFamily es toda la Comunidad creada alrededor de Java’ Shoppu, en donde se comparte información de primera como nuevos lanzamientos, promociones y futuros concursos. Es gratis pertenecer a ella, sólo debes inscribirte en nuestra base de datos para recibir información ^^';
-        sendMessageText(recipientId, finalMessage);
+        sendMessageLink(recipientId, finalMessage);
     }
     else if (isContain(message, 'hablar con el #JavaTeam')) {
         finalMessage = 'Espero haberte podido ayudar en aclarar sus dudas, en un momento el #JavaTeam estará comunicándose.\n\nSe despide tu amigo Javabot ¡seguro estaremos en contacto de nuevo';
@@ -238,7 +233,7 @@ function sendMessageText(recipientId,message) {
 
     callSendAPI(messageData);
 }
-function sendMessageLink(recipientId,message,urlMessage,buttonMessage) {
+function sendMessageLink(recipientId,message) {
 
    var messageData = {
        recipient: {
@@ -254,8 +249,8 @@ function sendMessageLink(recipientId,message,urlMessage,buttonMessage) {
                    buttons: [
                        {
                          type: "web_url",
-                          url: urlMessage,
-                          title: buttonMessage,
+                          url: "https://www.facebook.com/pg/JavaShoppu/shop/?rid=404621399554702&rt=39",
+                          title: "Inscribirse",
                        }
 
                    ]
@@ -363,9 +358,9 @@ function sendMessageButtonReqSub(recipientId, message) {
                             payload: "formas de pago"
                         },
                         {
-                            type: "postback",
-                            title: "Ver productos",
-                            payload: "ver productos"
+                          type: "web_url",
+                           url: "https://www.facebook.com/pg/JavaShoppu/shop/?rid=404621399554702&rt=39",
+                           title: "ver productos",
                         },
                         {
                             type: "postback",
@@ -461,20 +456,6 @@ function sendMessageButtonStart(recipientId, message) {
 function callSendAPI(messageData) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/messages?access_token=test_token_java',
-        qs: { access_token : APP_TOKEN },
-        method: 'POST',
-        json: messageData
-    }, function (error, response, data) {
-        if (error) {
-            console.log('No esta funcionando');
-        } else {
-            console.log('exito');
-        }
-    });
-}
-function callSendAPIStart(messageData) {
-    request({
-        uri: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=test_token_java',
         qs: { access_token : APP_TOKEN },
         method: 'POST',
         json: messageData

@@ -1,0 +1,30 @@
+{
+  "name": "javabotfinal",
+  "version": "1.0.0",
+  "description": "Bot para la tienda java shoopu",
+  "main": "main.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmcasasr/JavaBotFinal.git"
+  },
+  "keywords": [
+    "Bot",
+    "messenger"
+  ],
+  "author": "Nicolas Mateo Casas Ramos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmcasasr/JavaBotFinal/issues"
+  },
+  "homepage": "https://github.com/nmcasasr/JavaBotFinal#readme"
+}
