@@ -306,7 +306,7 @@ function sendMessageButtonReqSub(recipientId, message) {
                         },
                         {
                           type: "web_url",
-                           url: "https://goo.gl/tTTflG",
+                           url: "https://web.facebook.com/pg/JavaShoppu/shop/?rid=404621399554702&rt=6",
                            title: "Ver productos",
                         },
                         {
