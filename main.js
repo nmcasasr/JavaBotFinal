@@ -75,6 +75,8 @@ function setupGetStartedButton(res) {
 
 function evaluatePostBack(recipientId, message) {
     var finalMessage = '';
+    var finalMessage1 = '';
+    var finalMessage2 = '';
     var link = '';
     var titulo = '';
     console.log("entro");
@@ -82,7 +84,7 @@ function evaluatePostBack(recipientId, message) {
         finalMessage = 'En esta sección conoceras todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
         sendMessageButtonStart(recipientId,finalMessage);
     }
-    //opcion uno
+    //opcion uno info productos
     else if (isContain(message, 'informacion de productos')) {
         finalMessage = 'En esta sección conoceras todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
         sendMessageButtonInfo(recipientId,finalMessage);
@@ -113,9 +115,10 @@ function evaluatePostBack(recipientId, message) {
     }
   // sub-opciones de opcion 2
       else if (isContain(message, 'procesoDeCompra')) {
-        finalMessage = 'El proceso de compra en Java’ Shoppu es muuuy sencillo, te lo explico en 5 pasos:\n1. Cierre de pedido todos los 15 y 30 de cada mes.\n2. Identifica los productos que deseas y realiza un abono desde el 60% del total.\n3. El tiempo de llegada a Colombia es de 5-10 días hábiles para productos coreanos y entre 20-25 días hábiles para productos japoneses y especiales.\n4. Al llegar tus productos el #JavaTeam te lo comunicará vía Facebook, si existe un saldo pendiente se tendrán 10 días hábiles para su cancelación a partir del aviso.\n5. El servicio de envío se cancela en contra-entrega al mensajero. En Medellín contamos con mensajero propio dentro del #JavaTeam :D\n¿He sido claro? Aquí tengo otra información que puede serte útil:';
-        //finalMessage = 'Conoce los beneficios de ser #ClienteJavaShoppu, sólo con realizar una compra de un producto oficial puedes disfrutar de los siguientes descuentos: \n\n1. 5% en todas tus compras.\n\n2. 10% durante el mes de tu cumpleaños.\n\n3. Participación exclusiva en rifas y concursos.\n\n4. Futuras promociones.';
-        sendMessageButtonReqSub(recipientId, finalMessage);
+        finalMessage = 'El proceso de compra en Java’ Shoppu es muuuy sencillo, te lo explico en 5 pasos:\n1. Cierre de pedido todos los 15 y 30 de cada mes.\n2. Identifica los productos que deseas y realiza un abono desde el 60% del total.\n3. El tiempo de llegada a Colombia es de 5-10 días hábiles para productos coreanos y entre 20-25 días hábiles para productos japoneses y especiales.\n4. Al llegar tus productos el #JavaTeam te lo comunicará vía Facebook, si existe un saldo pendiente se tendrán 10 días hábiles para su cancelación a partir del aviso.\n5. El servicio de envío se cancela en contra-entrega al mensajero.';
+        sendMessageText(recipientId, finalMessage);
+        finalMessage1 = 'En Medellín contamos con mensajero propio dentro del #JavaTeam :D \n ¿He sido claro? Aquí tengo otra información que puede serte útil:';
+        sendMessageButtonReqSub(recipientId, finalMessage1);
       }
           //sub-sub-opcion de proceso de compra
           else if (isContain(message, 'formas de pago')) {
@@ -134,8 +137,8 @@ function evaluatePostBack(recipientId, message) {
       else if (isContain(message, 'estado de un pedido')) {
         finalMessage = '¡Sé que deseas tu pedido ya en tus manos! Vi trabajar arduamente al #JavaTeam para que muy pronto lo tengas en ellas para su disfrute ^^ en el siguiente link puedes conocer el estado de tu pedido, sólo deberás encontrar tu número de orden de compra y listo. Cualquier duda me comentas.';
         link = 'https://goo.gl/PKmWcT';
-        titulo = 'Ver estado del pedido';
-        sendMessageText(recipientId, finalMessage);
+        titulo = 'Estado del pedido';
+        sendMessageLink(recipientId, finalMessage,link,titulo);
       }
 
 //opcion 3
