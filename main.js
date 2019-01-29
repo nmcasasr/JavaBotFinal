@@ -71,9 +71,7 @@ function setupGetStartedButton(res) {
     // Start the request
 
 }
-function firstMessage(recipientId, message) {
 
-}
 
 function evaluatePostBack(recipientId, message) {
     var finalMessage = '';
@@ -97,7 +95,7 @@ function evaluatePostBack(recipientId, message) {
         sendMessageLink(recipientId, finalMessage,link,titulo);
     }
     else if (isContain(message, 'japoneses')) {
-        finalMessage = 'En Java’ Shoppu también puedes conseguir CD’s, DVD’s, photobooks y otros productos de tus artistas japoneses o extranjeros con lanzamientos en Japón. Recuerda que su tiempo de espera es mayor a los productos coreanos.\n\nCuénteme cuál artista y producto desea y le comunicaré al #JavaTeam para que dé pronta respuesta :D';
+        finalMessage = 'En Java’ Shoppu también puedes conseguir CD’s, DVD’s, photobooks y otros productos de tus artistas japoneses o extranjeros con lanzamientos en Japón. Recuerda que su tiempo de espera es mayor a los productos coreanos.\n\nCuénteme cuál artista y producto deseas y te comunicaré al #JavaTeam para que dé pronta respuesta :D';
         link = 'https://www.facebook.com/pg/JavaShoppu/shop/?ref=page_internal&cid=431617853951858';
         titulo = 'Oferta Japonesa';
         sendMessageLink(recipientId, finalMessage,link,titulo);
@@ -115,13 +113,13 @@ function evaluatePostBack(recipientId, message) {
     }
   // sub-opciones de opcion 2
       else if (isContain(message, 'procesoDeCompra')) {
-        //finalMessage = 'El proceso de compra en Java’ Shoppu es muuuy sencillo, te lo explico en 5 pasos: \n1. Ya encontrados los productos que deseas y sus precios, debes realizar un abono inicial de mínimo el 60% correspondiente al total sin envío. \n 2. Una vez culminada la fecha de pedido, el tiempo de llegada a Colombia es de 5-10 días hábiles para productos coreanos. Productos japoneses y especiales tardan entre 20-25 días hábiles. \n 3. En Java’ Shoppu se cierran pedidos todos los 15 y 30 de cada mes. \n 4. Al llegar tus productos el #JavaTeam te lo comunicará vía Facebook, si existe un saldo pendiente se tendrán 10 días hábiles para su cancelación a partir del aviso. \n 5. El servicio de envío se cancela en contra-entrega al mensajero. En Medellín contamos con mensajero propio dentro del #JavaTeam :D \n ¿He sido claro? Aquí tengo otra información que puede serte útil:';
-        finalMessage = 'Conoce los beneficios de ser #ClienteJavaShoppu, sólo con realizar una compra de un producto oficial puedes disfrutar de los siguientes descuentos: \n\n1. 5% en todas tus compras.\n\n2. 10% durante el mes de tu cumpleaños.\n\n3. Participación exclusiva en rifas y concursos.\n\n4. Futuras promociones.';
+        finalMessage = 'El proceso de compra en Java’ Shoppu es muuuy sencillo, te lo explico en 5 pasos:\n1. Cierre de pedido todos los 15 y 30 de cada mes.\n2. Identifica los productos que deseas y realiza un abono desde el 60% del total.\n3. El tiempo de llegada a Colombia es de 5-10 días hábiles para productos coreanos y entre 20-25 días hábiles para productos japoneses y especiales.\n4. Al llegar tus productos el #JavaTeam te lo comunicará vía Facebook, si existe un saldo pendiente se tendrán 10 días hábiles para su cancelación a partir del aviso.\n5. El servicio de envío se cancela en contra-entrega al mensajero. En Medellín contamos con mensajero propio dentro del #JavaTeam :D\n¿He sido claro? Aquí tengo otra información que puede serte útil:';
+        //finalMessage = 'Conoce los beneficios de ser #ClienteJavaShoppu, sólo con realizar una compra de un producto oficial puedes disfrutar de los siguientes descuentos: \n\n1. 5% en todas tus compras.\n\n2. 10% durante el mes de tu cumpleaños.\n\n3. Participación exclusiva en rifas y concursos.\n\n4. Futuras promociones.';
         sendMessageButtonReqSub(recipientId, finalMessage);
       }
           //sub-sub-opcion de proceso de compra
           else if (isContain(message, 'formas de pago')) {
-              finalMessage = 'En Java’ Shoppu se manejan las siguientes formas de pago para toda Colombia:\n\nGratis por transferencia bancaria desde cualquier banco, recarga en Nequi y depósito en Corresponsal Bancario de Bancolombia.\n\nGiro con cobro por servicio vía Efecty..';
+              finalMessage = 'En Java’ Shoppu se manejan las siguientes formas de pago para toda Colombia:\n\nGratis por transferencia bancaria desde cualquier banco, recarga en Nequi y depósito en Corresponsal Bancario de Bancolombia.\n\nGiro con cobro por servicio vía Efecty.';
               sendMessageText(recipientId, finalMessage);
           }
           else if (isContain(message, 'confiabilidad')) {
@@ -130,17 +128,19 @@ function evaluatePostBack(recipientId, message) {
           }
 
       else if (isContain(message, 'confirmar pago')) {
-        finalMessage = '¡Muchas gracias por confiar en Java’ Shoppu! Por favor no olvides adjuntar una foto del comprobante de pago y los siguientes datos: nombres, celular, ciudad, dirección detallada y número de documento. Pronto el #JavaTeam estará enviando su orden de compra.';
+        finalMessage = '¡Muchas gracias por confiar en Java’ Shoppu! Por favor no olvides adjuntar una foto del comprobante de pago y los siguientes datos: nombres, celular, ciudad, dirección detallada y número de documento y fecha de cumpleaños. Pronto el #JavaTeam estará enviando tu orden de compra.';
         sendMessageText(recipientId, finalMessage);
       }
       else if (isContain(message, 'estado de un pedido')) {
-        finalMessage = '¡Sé que deseas tu pedido ya en tus manos! Vi trabajar arduamente al #JavaTeam para que muy pronto lo tengas en ellas para su disfrute ^^ por favor escríbeme el número de orden para que el #JavaTeam se comunique con nuevas noticias.';
+        finalMessage = '¡Sé que deseas tu pedido ya en tus manos! Vi trabajar arduamente al #JavaTeam para que muy pronto lo tengas en ellas para su disfrute ^^ en el siguiente link puedes conocer el estado de tu pedido, sólo deberás encontrar tu número de orden de compra y listo. Cualquier duda me comentas.';
+        link = 'https://goo.gl/PKmWcT';
+        titulo = 'Ver estado del pedido';
         sendMessageText(recipientId, finalMessage);
       }
 
 //opcion 3
     else if (isContain(message, 'preguntas frecuentes')) {
-        finalMessage = 'Por si te queda alguna dudita adicional jeje, aquítle presentamos nuestro programa de fidelización y otras cositas';
+        finalMessage = 'Por si te queda alguna dudita adicional jeje, aquí te presentamos nuestro programa de fidelización y otras cositas';
         sendMessageButtonAsk(recipientId, finalMessage);
     }
 //sub-opcion de opciones 3
@@ -150,18 +150,19 @@ function evaluatePostBack(recipientId, message) {
     }
     else if (isContain(message, '#JavaShoppuFamily')) {
         finalMessage = '#JavaShoppuFamily es toda la Comunidad creada alrededor de Java’ Shoppu, en donde se comparte información de primera como nuevos lanzamientos, promociones y futuros concursos. Es gratis pertenecer a ella, sólo debes inscribirte en nuestra base de datos para recibir información ^^';
-        link = 'https://goo.gl/tTTflG';
+        link = 'https://goo.gl/forms/RK73kQwxNOVIAZWc2';
         titulo = 'Ir a encuesta';
         sendMessageLink(recipientId, finalMessage,link,titulo);
 
 
     }
     else if (isContain(message, 'hablar con el #JavaTeam')) {
-        finalMessage = 'Espero haberte podido ayudar en aclarar sus dudas, en un momento el #JavaTeam estará comunicándose.\n\nSe despide tu amigo Javabot ¡seguro estaremos en contacto de nuevo';
+        finalMessage = 'Espero haberte podido ayudar en aclarar sus dudas, en un momento el #JavaTeam estará comunicándose.\n\nSe despide tu amigo Javabot ¡seguro estaremos en contacto de nuevo!';
         sendMessageText(recipientId, finalMessage);
     }
 
 }
+
 function sendMessageText(recipientId,message) {
 
     var messageData = {
@@ -374,12 +375,12 @@ function sendMessageButtonStart(recipientId, message) {
                     buttons: [
                         {
                             type: "postback",
-                            title: "Informacion de productos",
+                            title: "Info de productos",
                             payload: "informacion de productos"
                         },
                         {
                             type: "postback",
-                            title: "Informacion de pedido",
+                            title: "Info de pedido",
                             payload: "informacion de pedido"
                         },
                         {
