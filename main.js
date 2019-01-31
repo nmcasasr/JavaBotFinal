@@ -97,13 +97,13 @@ function evaluatePostBack(recipientId, message) {
         sendMessageLink(recipientId, finalMessage,link,titulo);
     }
     else if (isContain(message, 'japoneses')) {
-        finalMessage = 'En Java’ Shoppu también puedes conseguir CD’s, DVD’s, photobooks y otros productos de tus artistas japoneses o extranjeros con lanzamientos en Japón. Recuerda que su tiempo de espera es mayor a los productos coreanos.\n\nCuénteme cuál artista y producto deseas y te comunicaré al #JavaTeam para que dé pronta respuesta :D';
+        finalMessage = 'En Java’ Shoppu también puedes conseguir CD’s, DVD’s, photobooks y otros productos de tus artistas japoneses o extranjeros con lanzamientos en Japón. Recuerda que su tiempo de espera es mayor a los productos coreanos.\n\nCuéntame cuál artista y producto deseas y te comunicaré al #JavaTeam para que dé pronta respuesta :D';
         link = 'https://www.facebook.com/pg/JavaShoppu/shop/?ref=page_internal&cid=431617853951858';
         titulo = 'Oferta Japonesa';
         sendMessageLink(recipientId, finalMessage,link,titulo);
     }
     else if (isContain(message, 'otros productos')) {
-        finalMessage = '¿Deseas algo más que productos oficiales? En Java’ Shoppu puedes conseguir maquillaje TONYMOLY y productos fanmade como afiches con la imagen que desees, set con postcards y stickers, pines metálicos, gorras, camisetas y mucho más.\n\nTambién contamos con productos de otros países como China, Taiwán y EEUU, sólo pregúntame y estaré comunicándole la info al #JavaTeam para su pronta respuesta.';
+        finalMessage = '¿Deseas algo más que productos oficiales? En Java’ Shoppu puedes conseguir maquillaje TONYMOLY y productos fanmade como afiches con la imagen que desees, set con postcards y stickers, pines metálicos, gorras, camisetas y mucho más.\n\nTambién contamos con productos de otros países como China, Taiwán y EEUU, sólo pregúntame y estaré comunicándole la info al #JavaTeam para tu pronta respuesta.';
         sendMessageText(recipientId, finalMessage);
     }
 
@@ -115,9 +115,9 @@ function evaluatePostBack(recipientId, message) {
     }
   // sub-opciones de opcion 2
       else if (isContain(message, 'procesoDeCompra')) {
-        finalMessage = 'El proceso de compra en Java’ Shoppu es muuuy sencillo, te lo explico en 5 pasos:\n1. Cierre de pedido todos los 15 y 30 de cada mes.\n2. Identifica los productos que deseas y realiza un abono desde el 60% del total.\n3. El tiempo de llegada a Colombia es de 5-10 días hábiles para productos coreanos y entre 20-25 días hábiles para productos japoneses y especiales.\n4. Al llegar tus productos el #JavaTeam te lo comunicará vía Facebook, si existe un saldo pendiente se tendrán 10 días hábiles para su cancelación a partir del aviso.\n5. El servicio de envío se cancela en contra-entrega al mensajero.';
+        finalMessage = 'El proceso de compra en Java’ Shoppu es muuuy sencillo, te lo explico en 5 pasos:\n\n1. Cerramos pedidos todos los 15 y 30 de cada mes.\n\n2. Identifica los productos que deseas y realiza un abono desde el 60% del total.\n\n3. El tiempo de llegada a Colombia es de 5-10 días hábiles para productos coreanos y entre 20-25 días hábiles para productos japoneses y especiales.\n\n';
         sendMessageText(recipientId, finalMessage);
-        finalMessage1 = 'En Medellín contamos con mensajero propio dentro del #JavaTeam :D \n ¿He sido claro? Aquí tengo otra información que puede serte útil:';
+        finalMessage1 = '4. Al llegar tus productos el #JavaTeam te lo comunicará vía Facebook, si existe un saldo pendiente tendrás 10 días hábiles para su cancelación a partir del aviso.\n\n5. El servicio de envío se cancela en contra-entrega al mensajero.\n\nEn Medellín contamos con mensajero propio dentro del #JavaTeam :D \n\n ¿He sido claro? Aquí tengo otra información que puede serte útil:';
         sendMessageButtonReqSub(recipientId, finalMessage1);
       }
           //sub-sub-opcion de proceso de compra
@@ -131,13 +131,13 @@ function evaluatePostBack(recipientId, message) {
           }
 
       else if (isContain(message, 'confirmar pago')) {
-        finalMessage = '¡Muchas gracias por confiar en Java’ Shoppu! Por favor no olvides adjuntar una foto del comprobante de pago y los siguientes datos: nombres, celular, ciudad, dirección detallada y número de documento y fecha de cumpleaños. Pronto el #JavaTeam estará enviando tu orden de compra.';
+        finalMessage = '¡Muchas gracias por confiar en Java’ Shoppu! Por favor no olvides adjuntar una foto del comprobante de pago y los siguientes datos: nombres, celular, ciudad, dirección detallada, número de documento y fecha de cumpleaños. Pronto el #JavaTeam estará enviando tu orden de compra.';
         sendMessageText(recipientId, finalMessage);
       }
       else if (isContain(message, 'estado de un pedido')) {
         finalMessage = '¡Sé que deseas tu pedido ya en tus manos! Vi trabajar arduamente al #JavaTeam para que muy pronto lo tengas en ellas para su disfrute ^^ en el siguiente link puedes conocer el estado de tu pedido, sólo deberás encontrar tu número de orden de compra y listo. Cualquier duda me comentas.';
         link = 'https://goo.gl/PKmWcT';
-        titulo = 'Estado del pedido';
+        titulo = 'Hacer seguimiento';
         sendMessageLink(recipientId, finalMessage,link,titulo);
       }
 
@@ -148,7 +148,7 @@ function evaluatePostBack(recipientId, message) {
     }
 //sub-opcion de opciones 3
     else if (isContain(message, '#ClienteJavaShoopu')) {
-        finalMessage = 'Java’ Shoppu posee un programa que premia a sus clientes fieles. Es muy fácil pertenecer a este, sólo con realizar una compra de un producto oficial te conviertes automáticamente en #ClienteJavaShoppu. Los beneficios son:\n\n 1. Descuento del 5% en todas sus compras.\n\n 2. Descuento del 10% durante el mes de su cumpleaños.\n\n3. Descuento del 10% en productos de la sección #HoyHace1Año.\n\n 4. Participación exclusiva en rifas y concursos.\n\n 5. Futuras promociones que se comunicarán.';
+        finalMessage = 'Java’ Shoppu posee un programa que premia a sus clientes fieles. Es muy fácil pertenecer a este, sólo con realizar una compra de un producto oficial te conviertes automáticamente en #ClienteJavaShoppu. Los beneficios son:\n\n 1. Descuento del 5% en todas tus compras.\n\n 2. Descuento del 10% durante el mes de tu cumpleaños.\n\n3. Descuento del 10% en productos de la sección #HoyHace1Año.\n\n 4. Participación exclusiva en rifas y concursos.\n\n 5. Futuras promociones que se comunicarán.';
         sendMessageText(recipientId, finalMessage);
     }
     else if (isContain(message, '#JavaShoppuFamily')) {
@@ -439,6 +439,122 @@ payload:"empezar"
          }
      });
  }
+function setupMenu(res){
+      var messageData = {
+
+        {
+          persistent_menu:[
+            {
+              locale:"default",
+              composer_input_disabled: true,
+              call_to_actions:[
+                {
+                  title:"Info de productos",
+                  type:"nested",
+                  "call_to_actions":[
+                    {
+                      title:"Coreanos",
+                      type:"postback",
+                      payload:"coreanos"
+                    },
+                    {
+                      title:"Japoneses",
+                      type:"postback",
+                      payload:"japoneses"
+                    },
+                    {
+                      title:"Otros productos",
+                      type:"postback",
+                      payload:"otros productos"
+                    }
+                  ]
+                },
+                {
+                  title:"Info de pedido",
+                  type:"nested",
+                  "call_to_actions":[
+                    {
+                      title:"Proceso de compra",
+                      type:"nested",
+                      "call_to_actions":[
+                        {
+                          title:"Formas de pago",
+                          type:"postback",
+                          payload:"formas de pago"
+                        },
+                        {
+                          type:"web_url",
+                          title:"Ver productos",
+                          url:"hhttps://web.facebook.com/pg/JavaShoppu/shop/",
+                          webview_height_ratio:"full"
+                        },
+                        {
+                          title:"confiabilidad",
+                          type:"postback",
+                          payload:"confiabilidad"
+                        },
+                        {
+                          title:"Proceso detallado",
+                          type:"postback",
+                          payload:"procesoDeCompra"
+                        }
+                      ]
+                    },
+                    {
+                      title:"Confirmar pago",
+                      type:"postback",
+                      payload:"confirmar pago"
+                    },
+                    {
+                      title:"Estado de un pedido",
+                      type:"postback",
+                      payload:"estado de un pedido"
+                    }
+                  ]
+                },
+                {
+                  title:"Preguntas frecuentes",
+                  type:"nested",
+                  "call_to_actions":[
+                    {
+                      title:"#ClienteJavaShoppu",
+                      type:"postback",
+                      payload:"#ClienteJavaShoppu"
+                    },
+                    {
+                      title:"#JavaShoppuFamily",
+                      type:"postback",
+                      payload:"#JavaShoppuFamily"
+                    },
+                    {
+                      title:"Hablar con el #JavaTeam",
+                      type:"postback",
+                      payload:"hablar con el #JavaTeam"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      };
+
+      // Start the request
+      console.log("empezar2");
+      request({
+          uri: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=test_token_java',
+          qs: { access_token : APP_TOKEN },
+          method: 'POST',
+          json: messageData
+      },
+      function (error, response, data) {
+          if (error) {
+              console.log('No esta funcionando');
+          } else {
+              console.log('exito get started');
+          }
+      });
+  }
 function isContain(sentence, word) {
     return sentence.indexOf(word) > -1;
 }
