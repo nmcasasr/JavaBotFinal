@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-const APP_TOKEN = 'EAAO9xR4dD5MBAC3JzfoNAtYvyBovmTZAhZAi71CNnVlLpoLekPggZCdgHZAqMbVXtQ92ngGfuitpzlv9VtWLhOPTaIuC8F0BK3AplTfJwv8PyBqF9YoAW0aXuYqZAMeTfZBtRwA5QMlNIPnBHxrjAeWr9QaOtUSPy9Vn6uAw8NsAZDZD';
+const APP_TOKEN = 'EAAO9xR4dD5MBAGKVQsjUHucf5kwH9KSItoByhMtRcRtkkuYPrZAUvoG4m6JvumAQFZATp6p2hbeExebw72TbMFcEyJMfDeCZBneu8GjGkzZB5xa4koKDNup5f7Jo5Di7gS8IP6prgE3ZC5itKay5vVkZA8I6LrWdb7ZA1EYSKLVAgZDZD';
 
 var app = express();
 app.use(bodyParser.json());
@@ -23,8 +23,9 @@ app.get('/webhook', function (req, res) {
     else {
         res.send('Tu no deberias estar aqui');
     }
-    console.log("Get started 1");
-    setupGetStartedButton(res);
+   //setupGetStartedButton(res);
+   console.log("aca sirve")
+   setupMenu(res);
 });
 
 app.post('/webhook', function (req, res) {
@@ -58,28 +59,13 @@ function receivePostBack(event) {
     evaluatePostBack(senderId, messagePayload);
 
 }
-function setupGetStartedButton(res) {
-    var messageData = {
-        "get_started": [
-            {
-                "payload": "USER_DEFINED_PAYLOAD"
-            }
-        ]
-    };
-    console.log("Star button work");
-    callSendAPIStart(messageData);
-    // Start the request
-
-}
-
-
 function evaluatePostBack(recipientId, message) {
     var finalMessage = '';
     var finalMessage1 = '';
     var finalMessage2 = '';
     var link = '';
     var titulo = '';
-    console.log("entro");
+
     if (isContain(message, 'empezar')) {
         finalMessage = 'En esta sección conoceras todo acerca de los precios y variedad de los productos que puedes encontrar en Java’ Shoppu';
         sendMessageButtonStart(recipientId,finalMessage);
@@ -417,14 +403,11 @@ function callSendAPI(messageData) {
 function setupGetStartedButton(res){
      var messageData = {
 
-get_started:{
-payload:"empezar"
-}
-
+       get_started:{
+       payload:"empezar"
+     }
      };
 
-     // Start the request
-     console.log("empezar");
      request({
          uri: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=test_token_java',
          qs: { access_token : APP_TOKEN },
@@ -440,121 +423,171 @@ payload:"empezar"
      });
  }
 function setupMenu(res){
-      var messageData = {
-
-        {
-          persistent_menu:[
-            {
-              locale:"default",
-              composer_input_disabled: true,
-              call_to_actions:[
-                {
-                  title:"Info de productos",
-                  type:"nested",
-                  "call_to_actions":[
+ var messageData = {
+                  persistent_menu:[
                     {
-                      title:"Coreanos",
-                      type:"postback",
-                      payload:"coreanos"
-                    },
-                    {
-                      title:"Japoneses",
-                      type:"postback",
-                      payload:"japoneses"
-                    },
-                    {
-                      title:"Otros productos",
-                      type:"postback",
-                      payload:"otros productos"
-                    }
-                  ]
-                },
-                {
-                  title:"Info de pedido",
-                  type:"nested",
-                  "call_to_actions":[
-                    {
-                      title:"Proceso de compra",
-                      type:"nested",
-                      "call_to_actions":[
+                      locale:"default",
+                      composer_input_disabled: false,
+                      call_to_actions:[
                         {
-                          title:"Formas de pago",
-                          type:"postback",
-                          payload:"formas de pago"
+                          title:"Info de productos",
+                          type:"nested",
+                          call_to_actions:[
+                            {
+                              title:"Coreanos",
+                              type:"postback",
+                              payload:"coreanos"
+                            },
+                            {
+                              title:"Japoneses",
+                              type:"postback",
+                              payload:"japoneses"
+                            },
+                            {
+                              title:"Otros productos",
+                              type:"postback",
+                              payload:"otros productos"
+                            }
+                          ]
                         },
                         {
-                          type:"web_url",
-                          title:"Ver productos",
-                          url:"hhttps://web.facebook.com/pg/JavaShoppu/shop/",
-                          webview_height_ratio:"full"
+                          title:"Info de pedido",
+                          type:"nested",
+                          call_to_actions:[
+                            {
+                              title:"Proceso de compra",
+                              type:"postback",
+                              payload:"procesoDeCompra"
+                            },
+                            {
+                              title:"Confirmar pago",
+                              type:"postback",
+                              payload:"confirmar pago"
+                            },
+                            {
+                              title:"Estado de un pedido",
+                              type:"postback",
+                              payload:"estado de un pedido"
+                            }
+                          ]
                         },
                         {
-                          title:"confiabilidad",
-                          type:"postback",
-                          payload:"confiabilidad"
-                        },
-                        {
-                          title:"Proceso detallado",
-                          type:"postback",
-                          payload:"procesoDeCompra"
+                          title:"Preguntas frecuentes",
+                          type:"nested",
+                          call_to_actions:[
+                            {
+                              title:"#ClienteJavaShoppu",
+                              type:"postback",
+                              payload:"#ClienteJavaShoppu"
+                            },
+                            {
+                              title:"#JavaShoppuFamily",
+                              type:"postback",
+                              payload:"#JavaShoppuFamily"
+                            },
+                            {
+                              title:"Hablar con el #JavaTeam",
+                              type:"postback",
+                              payload:"hablar con el #JavaTeam"
+                            }
+                          ]
                         }
                       ]
-                    },
-                    {
-                      title:"Confirmar pago",
-                      type:"postback",
-                      payload:"confirmar pago"
-                    },
-                    {
-                      title:"Estado de un pedido",
-                      type:"postback",
-                      payload:"estado de un pedido"
                     }
                   ]
-                },
-                {
-                  title:"Preguntas frecuentes",
-                  type:"nested",
-                  "call_to_actions":[
-                    {
-                      title:"#ClienteJavaShoppu",
-                      type:"postback",
-                      payload:"#ClienteJavaShoppu"
-                    },
-                    {
-                      title:"#JavaShoppuFamily",
-                      type:"postback",
-                      payload:"#JavaShoppuFamily"
-                    },
-                    {
-                      title:"Hablar con el #JavaTeam",
-                      type:"postback",
-                      payload:"hablar con el #JavaTeam"
-                    }
-                  ]
-                }
-              ]
+        };
+var messageData2 =
+{
+  persistent_menu:[
+    {
+      locale:"default",
+      composer_input_disabled: false,
+      call_to_actions:[
+        {
+          title:"Info de productos",
+          type:"nested",
+          call_to_actions:[
+            {
+              title:"Coreanos",
+              type:"postback",
+              payload:"coreanos"
+            },
+            {
+              title:"Japoneses",
+              type:"postback",
+              payload:"japoneses"
+            },
+            {
+              title:"Otros productos",
+              type:"postback",
+              payload:"otros productos"
+            }
+          ]
+        },
+        {
+          title:"Info de pedidos",
+          type:"nested",
+          call_to_actions:[
+            {
+              title:"Proceso De Compra",
+              type:"postback",
+              payload:"procesoDeCompra"
+            },
+            {
+              title:"Confirmar pago",
+              type:"postback",
+              payload:"confirmar pago"
+            },
+            {
+              title:"Estado de un pedido",
+              type:"postback",
+              payload:"estado de un pedido"
+            }
+          ]
+        },
+        {
+          title:"Preguntas frecuentes",
+          type:"nested",
+          call_to_actions:[
+            {
+              title:"#ClienteJavaShoopu",
+              type:"postback",
+              payload:"#ClienteJavaShoopu"
+            },
+            {
+              title:"#JavaShoppuFamily",
+              type:"postback",
+              payload:"#JavaShoppuFamily"
+            },
+            {
+              title:"Hablar con el #JavaTeam",
+              type:"postback",
+              payload:"hablar con el #JavaTeam"
             }
           ]
         }
-      };
+      ]
+    }
+  ]
+};
 
-      // Start the request
-      console.log("empezar2");
+
+
       request({
           uri: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=test_token_java',
           qs: { access_token : APP_TOKEN },
           method: 'POST',
-          json: messageData
+          json: messageData2
       },
       function (error, response, data) {
           if (error) {
               console.log('No esta funcionando');
           } else {
-              console.log('exito get started');
+              console.log('exito menu');
           }
       });
   }
+
 function isContain(sentence, word) {
     return sentence.indexOf(word) > -1;
 }
