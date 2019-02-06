@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 
-const APP_TOKEN = 'EAAO9xR4dD5MBAGKVQsjUHucf5kwH9KSItoByhMtRcRtkkuYPrZAUvoG4m6JvumAQFZATp6p2hbeExebw72TbMFcEyJMfDeCZBneu8GjGkzZB5xa4koKDNup5f7Jo5Di7gS8IP6prgE3ZC5itKay5vVkZA8I6LrWdb7ZA1EYSKLVAgZDZD';
+const APP_TOKEN = 'EAAO9xR4dD5MBAGsPmWVh4cFGKGSxbMljJYl3ZBbeav7CYC6jlCBcXnHzPIOiofDcG9nLnBNdjU1B2NOPmekTOkDTHrZA67rv3WCgGqfTbUH2NG8HKmXUZBsK06wjPiCQ0wxf7ZAMgNt7IZBpLpvmDf7b88L50dze80MX45XphPAZDZD';
 
 var app = express();
 app.use(bodyParser.json());
@@ -26,6 +26,7 @@ app.get('/webhook', function (req, res) {
    //setupGetStartedButton(res);
    console.log("aca sirve")
    setupMenu(res);
+   setupGetStartedButton(res);
 });
 
 app.post('/webhook', function (req, res) {
